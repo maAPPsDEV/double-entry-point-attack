@@ -1,4 +1,9 @@
-build
 node_modules
+dist
 package-lock.json
-.secret
+
+#Hardhat files
+artifacts
+cache
+typechain
+deployments
