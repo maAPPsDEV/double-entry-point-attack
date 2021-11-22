@@ -41,6 +41,7 @@ const config: HardhatUserConfig = {
   },
   namedAccounts: {
     deployer: 0,
+    hacker: 1,
   },
 };
 
