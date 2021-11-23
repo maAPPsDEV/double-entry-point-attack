@@ -3,20 +3,20 @@ import { DeployFunction } from "hardhat-deploy/types";
 
 import { Hacker } from "../typechain";
 
-const deployOndoDistributor: DeployFunction = async (hre) => {
+const deployHacker: DeployFunction = async (hre) => {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
+  const { deployer, hacker } = await getNamedAccounts();
 
   await deploy("Hacker", {
-    from: deployer,
+    from: hacker,
     args: [],
     log: true,
   });
 
-  const hacker = await ethers.getContract("Hacker");
+  const hackerContract = await ethers.getContract("Hacker");
 };
 
-export default deployOndoDistributor;
-deployOndoDistributor.tags = ["Hacker"];
-deployOndoDistributor.dependencies = [];
+export default deployHacker;
+deployHacker.tags = ["Hacker"];
+deployHacker.dependencies = [];
