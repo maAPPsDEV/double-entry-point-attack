@@ -67,14 +67,6 @@ contract Token {
 
 ## Configuration
 
-### Install Truffle cli
-
-_Skip if you have already installed._
-
-```
-npm install -g truffle
-```
-
 ### Install Dependencies
 
 ```
@@ -86,11 +78,10 @@ yarn install
 ### Run Tests
 
 ```
-truffle develop
-test
+yarn test
 ```
 
-You should take ownership of the target contract successfully.
+You should see the result like following:
 
 ```
 truffle(develop)> test

@@ -1,30 +1,6 @@
 {
   "name": "attack",
   "version": "1.0.0",
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.1.0"
-  },
-  "devDependencies": {
-    "@openzeppelin/test-helpers": "^0.5.11",
-    "@truffle/contract": "^4.3.19",
-    "@truffle/hdwallet-provider": "^1.4.0",
-    "chai": "^4.3.4",
-    "prettier": "^2.3.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.13",
-    "solhint": "^3.3.6",
-    "solhint-plugin-prettier": "^0.0.5"
-  },
-  "scripts": {
-    "build": "truffle compile",
-    "console": "truffle console",
-    "ropsten:deploy": "truffle --network ropsten deploy",
-    "mainnet:deploy": "truffle --network mainnet deploy",
-    "develop": "truffle develop",
-    "test:local": "truffle test --network develop",
-    "test": "truffle test --network development",
-    "prettier": "prettier --write .",
-    "lint": "yarn prettier && solhint -c .solhint.json contracts/**/*.sol"
-  },
   "keywords": [
     "ethereum",
     "solidity",
@@ -32,5 +8,60 @@
   ],
   "author": "tony@maapps.dev",
   "license": "MIT",
-  "description": "Solidity Game - Attack"
+  "description": "Solidity Game - Attack",
+  "scripts": {
+    "compile": "hardhat compile",
+    "typecheck": "tsc --noEmit",
+    "lint": "solhint contracts/**/*.sol && tsc && eslint **/*.{js,ts} && prettier --check **/*.sol **/*.json **/*.ts **/*.js",
+    "lint:fix": "tsc && pretty-quick --pattern \"**/*.*(sol|json|js|ts)\" --verbose && solhint contracts/**/*.sol --fix && tsc && eslint **/*.{js,ts} --fix",
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat deploy"
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "parser": "typescript",
+      "style": "module"
+    }
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.1"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
+    "@nomiclabs/hardhat-etherscan": "^2.1.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/ethers-v5": "^7.1.0",
+    "@typechain/hardhat": "^2.3.0",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.7.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^5.1.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethereumjs-util": "^7.1.0",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.1",
+    "hardhat-deploy": "^0.9.1",
+    "hardhat-gas-reporter": "^1.0.4",
+    "import-sort-style-module": "^6.0.0",
+    "prettier": "^2.3.2",
+    "prettier-plugin-import-sort": "^0.0.7",
+    "prettier-plugin-solidity": "^1.0.0-beta.17",
+    "pretty-quick": "^3.1.1",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "^0.0.5",
+    "ts-node": "^10.2.1",
+    "typechain": "^5.1.2",
+    "typescript": "^4.3.5"
+  }
 }
