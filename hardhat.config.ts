@@ -22,7 +22,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: "0.8.5",
+        version: "0.6.12",
         settings: {
           optimizer: {
             enabled: true,
@@ -41,7 +41,7 @@ const config: HardhatUserConfig = {
   },
   namedAccounts: {
     deployer: 0,
-    hacker: 1,
+    player: 1,
   },
 };
 

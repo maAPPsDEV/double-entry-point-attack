@@ -1,22 +1,51 @@
 import { ethers } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/types";
 
-import { Hacker } from "../typechain";
+import {
+  CryptoVault,
+  DoubleEntryPoint,
+  Forta,
+  LegacyToken,
+} from "../typechain";
 
-const deployHacker: DeployFunction = async (hre) => {
+const deployCryptoVault: DeployFunction = async (hre) => {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
-  const { deployer, hacker } = await getNamedAccounts();
+  const { deployer, player } = await getNamedAccounts();
 
-  await deploy("Hacker", {
-    from: hacker,
+  await deploy("LegacyToken", {
+    from: deployer,
     args: [],
     log: true,
   });
+  const lgt: LegacyToken = await ethers.getContract("LegacyToken");
 
-  const hackerContract = await ethers.getContract("Hacker");
+  await deploy("Forta", {
+    from: deployer,
+    args: [],
+    log: true,
+  });
+  const forta: Forta = await ethers.getContract("Forta");
+
+  await deploy("CryptoVault", {
+    from: deployer,
+    args: [deployer],
+    log: true,
+  });
+  const vault: CryptoVault = await ethers.getContract("CryptoVault");
+
+  await deploy("DoubleEntryPoint", {
+    from: deployer,
+    args: [lgt.address, vault.address, forta.address, player],
+    log: true,
+  });
+  const det: DoubleEntryPoint = await ethers.getContract("DoubleEntryPoint");
+
+  await vault.setUnderlying(det.address);
+  await lgt.delegateToNewContract(det.address);
+  await lgt.mint(vault.address, ethers.utils.parseEther("100"));
 };
 
-export default deployHacker;
-deployHacker.tags = ["Hacker"];
-deployHacker.dependencies = [];
+export default deployCryptoVault;
+deployCryptoVault.tags = ["CryptoVault"];
+deployCryptoVault.dependencies = [];
