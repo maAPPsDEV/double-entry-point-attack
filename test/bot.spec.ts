@@ -46,7 +46,6 @@ describe("DetectionBot", () => {
   });
 
   it("should not allow sweep DET token", async () => {
-    console.log("value", vault.address);
     await expect(
       vault.sweepToken(await det.delegatedFrom())
     ).to.be.revertedWith("Alert has been triggered, reverting");
