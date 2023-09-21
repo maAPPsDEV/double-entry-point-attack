@@ -117,7 +117,7 @@ contract CryptoVault {
     */
 
     function sweepToken(IERC20 token) public {
-        require(token != underlying, "Can't transfer underlying token");
+        require(token != underlying, "Cant transfer underlying token");
         token.transfer(sweptTokensRecipient, token.balanceOf(address(this)));
     }
 }
